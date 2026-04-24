@@ -50,6 +50,14 @@ router.post('/', async (req, res) => {
       interpretation = await getDreamInterpretation(validation.value);
     } catch (aiError) {
       console.error('AI interpretation failed:', aiError);
+
+      if (aiError.message.includes('Server misconfigured')) {
+        return res.status(500).json({
+          error: 'AI configuration is missing on the server. Set GROQ_API_KEY in Render environment variables.',
+          type: 'config_error'
+        });
+      }
+
       return res.status(503).json({ 
         error: 'AI service temporarily unavailable.',
         type: 'ai_error'

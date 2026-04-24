@@ -35,7 +35,8 @@ dreamForm.addEventListener('submit', async (e) => {
 
 
         if (!response.ok) {
-            showErrorMessage(data.error || 'Failed to process your dream. Please try again.');
+            const data = await response.json().catch(() => null);
+            showErrorMessage(data?.error || 'Failed to process your dream. Please try again.');
             return;
         }
         
