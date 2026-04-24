@@ -1,6 +1,6 @@
 # Dream Journal App
 
-A full-stack web application that allows users to record their dreams and receive AI-powered interpretations using Claude.
+A full-stack web application that allows users to record their dreams and receive AI-powered interpretations using Groq (OpenAI-compatible API) or OpenAI.
 
 ## Features
 
@@ -15,9 +15,9 @@ A full-stack web application that allows users to record their dreams and receiv
 ## Tech Stack
 
 - **Backend**: Node.js, Express
-- **Database**: SQLite (better-sqlite3)
+- **Database**: SQLite
 - **Frontend**: HTML, CSS, Vanilla JavaScript
-- **AI**: Anthropic Claude API
+- **AI**: Groq API (default) or OpenAI API
 
 ## Project Structure
 
@@ -50,14 +50,19 @@ Create a `.env` file in the root directory:
 cp .env.example .env
 ```
 
-Edit `.env` and add your Anthropic API key:
+Edit `.env` and add your Groq API key:
 
 ```
-ANTHROPIC_API_KEY=your_api_key_here
-PORT=3000
+PORT=3001
+GROQ_API_KEY=your_groq_api_key_here
+GROQ_MODEL=llama-3.3-70b-versatile
+
+# Optional OpenAI fallback
+# OPENAI_API_KEY=your_openai_api_key_here
+# OPENAI_MODEL=gpt-4o-mini
 ```
 
-Get your API key from: https://console.anthropic.com/
+Get your API key from: https://console.groq.com/
 
 ### 3. Run the Application
 
@@ -71,7 +76,7 @@ Production mode:
 npm start
 ```
 
-The app will be available at `http://localhost:3000`
+The app will be available at `http://localhost:3001`
 
 ## API Endpoints
 
@@ -100,7 +105,8 @@ Make sure your code is in a Git repository (GitHub, GitLab, etc.)
 ### 3. Add Environment Variables
 
 In the Render dashboard, add:
-- `ANTHROPIC_API_KEY`: Your Anthropic API key
+- `GROQ_API_KEY`: Your Groq API key
+- `GROQ_MODEL`: (optional) defaults to `llama-3.3-70b-versatile`
 
 ### 4. Deploy
 
